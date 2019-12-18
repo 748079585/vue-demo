@@ -112,18 +112,6 @@ export default {
       otherQuery: {}
     }
   },
-  watch: {
-    $route: {
-      handler: function(route) {
-        const query = route.query
-        if (query) {
-          this.redirect = query.redirect
-          this.otherQuery = this.getOtherQuery(query)
-        }
-      },
-      immediate: true
-    }
-  },
   created() {
     // window.addEventListener('storage', this.afterQRScan)
   },
