@@ -155,6 +155,7 @@ export default {
           this.$store.dispatch('user/login', this.loginForm)
             .then(() => {
               console.log('登录成功！')
+              console.log(this.redirect + ',' + this.otherQuery)
               this.$router.push({ path: this.redirect || '/', query: this.otherQuery })
               this.loading = false
             })

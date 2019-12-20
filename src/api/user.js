@@ -1,5 +1,4 @@
 import request from '@/utils/request'
-import user from '../store/modules/user'
 
 const params = {
   clientId: 'app',
@@ -7,6 +6,13 @@ const params = {
   scope: 'all',
   username: '',
   password: ''
+}
+
+const info = {
+  roles: ['admin'],
+  introduction: 'I am a super administrator',
+  avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
+  name: 'Super Admin'
 }
 
 export function login(data) {
@@ -24,11 +30,14 @@ export function login(data) {
 }
 
 export function getInfo(token) {
-  return request({
-    url: '/user/info',
-    method: 'get',
-    params: { token }
-  })
+  // return request({
+  //   url: '/user/info',
+  //   method: 'get',
+  //   params: { token }
+  // })
+  return {
+    data: info
+  }
 }
 
 export function logout() {
