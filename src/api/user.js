@@ -35,14 +35,16 @@ export function getInfo(token) {
   //   method: 'get',
   //   params: { token }
   // })
+  console.log(token)
   return {
     data: info
   }
 }
 
 export function logout() {
+  console.log("logout")
   return request({
-    url: '/user/logout',
-    method: 'post'
+    url: '/sys/logout',
+    method: 'delete'
   })
 }
