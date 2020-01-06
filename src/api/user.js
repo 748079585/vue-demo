@@ -29,16 +29,11 @@ export function login(data) {
   })
 }
 
-export function getInfo(token) {
-  // return request({
-  //   url: '/user/info',
-  //   method: 'get',
-  //   params: { token }
-  // })
-  console.log(token)
-  return {
-    data: info
-  }
+export function getInfo() {
+  return request({
+    url: '/api-o/users/current',
+    method: 'get',
+  })
 }
 
 export function logout() {

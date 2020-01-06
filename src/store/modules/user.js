@@ -58,41 +58,48 @@ const actions = {
   getInfo({ commit, state }) {
     console.log('getInfo')
     return new Promise((resolve, reject) => {
-      const { roles, name, avatar, introduction } = info
+      // const { roles, name, avatar, introduction } = info
 
-      // roles must be a non-empty array
-      if (!roles || roles.length <= 0) {
-        reject('getInfo: roles must be a non-null array!')
-      }
+      // // roles must be a non-empty array
+      // if (!roles || roles.length <= 0) {
+      //   reject('getInfo: roles must be a non-null array!')
+      // }
 
-      commit('SET_ROLES', roles)
-      commit('SET_NAME', name)
-      commit('SET_AVATAR', avatar)
-      commit('SET_INTRODUCTION', introduction)
-      resolve(info)
-      // getInfo(state.token).then(response => {
-      //   console.log('info:' + response)
-      //   const { data } = response
+      // commit('SET_ROLES', roles)
+      // commit('SET_NAME', name)
+      // commit('SET_AVATAR', avatar)
+      // commit('SET_INTRODUCTION', introduction)
+      // resolve(info)
+      getInfo().then(response => {
+        console.log(response)
+        
 
-      //   if (!data) {
-      //     reject('Verification failed, please Login again.')
-      //   }
+        const { sysRoles, username, headImgUrl, nickname } = response
 
-      //   const { roles, name, avatar, introduction } = data
+        console.log(sysRoles)
+        // roles must be a non-empty array
+        if (!sysRoles || sysRoles.length <= 0) {
+          reject('getInfo: roles must be a non-null array!')
+        }
+        console.log('headImgUrl')
 
-      //   // roles must be a non-empty array
-      //   if (!roles || roles.length <= 0) {
-      //     reject('getInfo: roles must be a non-null array!')
-      //   }
+        if (!headImgUrl){
+          console.log(' set headImgUrl')
+          var avatar= 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif'
+          commit('SET_AVATAR', avatar)
+        }else{
+          commit('SET_AVATAR', headImgUrl)
+        }
 
-      //   commit('SET_ROLES', roles)
-      //   commit('SET_NAME', name)
-      //   commit('SET_AVATAR', avatar)
-      //   commit('SET_INTRODUCTION', introduction)
-      //   resolve(data)
-      // }).catch(error => {
-      //   reject(error)
-      // })
+        console.log('commit set props')
+        commit('SET_ROLES', sysRoles)
+        commit('SET_NAME', username)
+        
+        commit('SET_INTRODUCTION', nickname)
+        resolve(response)
+      }).catch(error => {
+        reject(error)
+      })
     })
   },
 
