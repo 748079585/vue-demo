@@ -18,15 +18,13 @@ export default {
     }
   },
   computed: {
-    ...mapGetters([
-      'roles'
-    ])
+    ...mapGetters(['roles'])
   },
   created() {
-    var result = this.roles.some(role=>{
-      if(role.code=='SUPER_ADMIN'){
-           return true 
-        }
+    var result = this.roles.some(role => {
+      if (role.code.equal('SUPER_ADMIN')) {
+        return true
+      }
     })
     if (!result) {
       this.currentRole = 'editorDashboard'

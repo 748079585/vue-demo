@@ -32,12 +32,11 @@ export function login(data) {
 export function getInfo() {
   return request({
     url: '/api-o/users/current',
-    method: 'get',
+    method: 'get'
   })
 }
 
 export function logout() {
-  console.log("logout")
   return request({
     url: '/sys/logout',
     method: 'delete'

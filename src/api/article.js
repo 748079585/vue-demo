@@ -2,7 +2,7 @@ import request from '@/utils/request'
 
 export function fetchList(query) {
   return request({
-    url: '/article/list',
+    url: '/api-o/permissions',
     method: 'get',
     params: query
   })

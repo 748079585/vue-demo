@@ -8,41 +8,27 @@
         </template>
       </el-table-column>
 
-      <el-table-column width="180px" align="center" label="Date">
+      <el-table-column min-width="200px" label="permission">
         <template slot-scope="{row}">
-          <span>{{ row.timestamp | parseTime('{y}-{m}-{d} {h}:{i}') }}</span>
+          <span>{{ row.permission }}</span>
         </template>
       </el-table-column>
 
-      <el-table-column min-width="300px" label="Title">
+      <el-table-column width="180px" align="center" label="name">
         <template slot-scope="{row}">
-          <span>{{ row.title }}</span>
+          <span>{{ row.name }}</span>
         </template>
       </el-table-column>
 
-      <el-table-column width="110px" align="center" label="Author">
+      <el-table-column width="180px" align="center" label="createTime">
         <template slot-scope="{row}">
-          <span>{{ row.author }}</span>
+          <span>{{ row.createTime | parseTime('{y}-{m}-{d} {h}:{i}') }}</span>
         </template>
       </el-table-column>
 
-      <el-table-column width="100px" label="Importance">
+      <el-table-column width="180px" align="center" label="updateTime">
         <template slot-scope="{row}">
-          <svg-icon v-for="n in + row.importance" :key="n" icon-class="star" class="icon-star" />
-        </template>
-      </el-table-column>
-
-      <el-table-column align="center" label="Readings" width="95">
-        <template slot-scope="{row}">
-          <span>{{ row.pageviews }}</span>
-        </template>
-      </el-table-column>
-
-      <el-table-column class-name="status-col" label="Status" width="110">
-        <template slot-scope="{row}">
-          <el-tag :type="row.status | statusFilter">
-            {{ row.status }}
-          </el-tag>
+          <span>{{ row.updateTime | parseTime('{y}-{m}-{d} {h}:{i}') }}</span>
         </template>
       </el-table-column>
 
@@ -97,9 +83,11 @@ export default {
   methods: {
     async getList() {
       this.listLoading = true
-      const { data } = await fetchList(this.listQuery)
-      this.list = data.items
-      this.total = data.total
+      const { content, totalElements } = await fetchList(this.listQuery)
+      console.log('data:' + content)
+      this.list = content
+      console.log('list:' + totalElements)
+      this.total = totalElements
       this.listLoading = false
       this.oldList = this.list.map(v => v.id)
       this.newList = this.oldList.slice()

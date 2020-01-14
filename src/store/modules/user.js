@@ -72,8 +72,6 @@ const actions = {
       // resolve(info)
       getInfo().then(response => {
         console.log(response)
-        
-
         const { sysRoles, username, headImgUrl, nickname } = response
 
         console.log(sysRoles)
@@ -83,18 +81,17 @@ const actions = {
         }
         console.log('headImgUrl')
 
-        if (!headImgUrl){
+        if (!headImgUrl) {
           console.log(' set headImgUrl')
-          var avatar= 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif'
+          var avatar = 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif'
           commit('SET_AVATAR', avatar)
-        }else{
+        } else {
           commit('SET_AVATAR', headImgUrl)
         }
 
         console.log('commit set props')
         commit('SET_ROLES', sysRoles)
         commit('SET_NAME', username)
-        
         commit('SET_INTRODUCTION', nickname)
         resolve(response)
       }).catch(error => {
@@ -107,7 +104,6 @@ const actions = {
   logout({ commit, state, dispatch }) {
     return new Promise((resolve, reject) => {
       logout(state.token).then(() => {
-        console.log("store logout")
         commit('SET_TOKEN', '')
         commit('SET_ROLES', [])
         removeToken()
