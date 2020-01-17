@@ -22,7 +22,7 @@ export default {
   },
   created() {
     var result = this.roles.some(role => {
-      if (role.code.equal('SUPER_ADMIN')) {
+      if (role.code === 'SUPER_ADMIN') {
         return true
       }
     })

@@ -49,9 +49,13 @@ const mutations = {
 const actions = {
   generateRoutes({ commit }, roles) {
     return new Promise(resolve => {
-      var result = roles.some(role => {
-        if (role.code.equal('SUPER_ADMIN')) {
-          return true
+      var result = false
+      roles.some(role => {
+        console.log(role)
+        console.log(role.code)
+        if (role.code === 'SUPER_ADMIN') {
+          console.log('return true')
+          result = true
         }
       })
       let accessedRoutes
