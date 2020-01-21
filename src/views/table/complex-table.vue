@@ -20,7 +20,7 @@
     </div>
 
     <el-table
-      :key="tableKey"
+      ref="dragTable"
       v-loading="listLoading"
       :data="list"
       border
@@ -103,6 +103,7 @@ import { fetchList, fetchPv, createArticle, updateArticle, deletePermission } fr
 import waves from '@/directive/waves' // waves directive
 import { parseTime } from '@/utils'
 import Pagination from '@/components/Pagination' // secondary package based on el-pagination
+import Sortable from 'sortablejs'
 
 export default {
   name: 'ComplexTable',
@@ -157,6 +158,28 @@ export default {
         setTimeout(() => {
           this.listLoading = false
         }, 1.5 * 1000)
+      })
+      this.$nextTick(() => {
+        this.setSort()
+      })
+    },
+    setSort() {
+      const el = this.$refs.dragTable.$el.querySelectorAll('.el-table__body-wrapper > table > tbody')[0]
+      this.sortable = Sortable.create(el, {
+        ghostClass: 'sortable-ghost', // Class name for the drop placeholder,
+        setData: function(dataTransfer) {
+          // to avoid Firefox bug
+          // Detail see : https://github.com/RubaXa/Sortable/issues/1012
+          dataTransfer.setData('Text', '')
+        },
+        onEnd: evt => {
+          // console.log('oldIndex: ' + evt.oldIndex)
+          // console.log('oldIndex: ' + evt.newIndex)
+          // const targetRow = this.list.splice(evt.oldIndex, 1)[0]
+          // this.list.splice(evt.newIndex, 0, targetRow)
+
+          // for show the changes, you can delete in you code
+        }
       })
     },
     handleFilter() {
@@ -286,3 +309,11 @@ export default {
   }
 }
 </script>
+
+<style>
+.sortable-ghost{
+  opacity: .8;
+  color: #fff!important;
+  background: #42b983!important;
+}
+</style>

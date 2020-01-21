@@ -105,7 +105,10 @@ export default {
           dataTransfer.setData('Text', '')
         },
         onEnd: evt => {
+          console.log('oldIndex: ' + evt.oldIndex)
+          console.log('oldIndex: ' + evt.newIndex)
           const targetRow = this.list.splice(evt.oldIndex, 1)[0]
+          console.log('targeRow: ' + targetRow.id)
           this.list.splice(evt.newIndex, 0, targetRow)
 
           // for show the changes, you can delete in you code
