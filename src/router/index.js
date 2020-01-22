@@ -154,6 +154,18 @@ export const asyncRoutes = [
         meta: { title: 'Complex Table' }
       }
     ]
+  },
+  {
+    path: '/echarts',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/echarts/index'),
+        name: 'Tab',
+        meta: { title: 'Tab', icon: 'tab' }
+      }
+    ]
   }
 ]
 
